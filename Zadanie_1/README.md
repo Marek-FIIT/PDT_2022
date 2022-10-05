@@ -27,9 +27,10 @@ Súbor authors.csv (cca 6 000 000 záznamov) bolo možné naraz importovať do d
 ### 1.2. Import do databázy
 Všetky SQL dopyty sú vykonávané **python** scriptom, ktorý pomocou **sqlalchemy** posiela raw SQL do lokálne bežiacej databázy. 
 
-Najprv do databázy pošlem SQL script na vytvorenie všetých tabuliek dátového modelu v takej podobe aká je požadovaná. Všetky id stĺpce, v tabuľkách okrem tabuliek *authors*, *conversations*, *hashtags*, *context_domains* a *context_entities*, sú definované ako autoincrement a identity, takže tie sa plnia automaticky pri napĺňaní týchto tabuliek.
+Najprv do databázy pošlem SQL script na vytvorenie všetých tabuliek dátového modelu v takej podobe aká je požadovaná. Všetky id stĺpce v tabuľkách, okrem tabuliek *authors*, *conversations*, *hashtags*, *context_domains* a *context_entities*, sú definované ako autoincrement a identity, takže tie sa plnia automaticky pri napĺňaní týchto tabuliek.
 
 Následne sa pomocou COPY (osodlaného ako raw SQL) do databázy importujú všetky čiastkové súbory všetkých tabuliek okrem *conversation_references*. Väzby vo forme foreign key v tabuľke *conversation_references* nie je možné validovať pri predspracovaní, takže tú nie je možné priamo importovať do cieľovej tabuľky. Na riešenie tohto problému je pri importovaní referencii vytvorená pomocná tabuľka *_conversation_references*, do ktorej sú nakopírované všetky záznamy. Z tejto pomocnej tabuľky sú následne za pomoci už naplnenej tabuľky *conversations* do cieľovej tabuľky *conversation_references* insertnuté len záznamy s platnými väzbami cez cudzie kľúče.
+
 
 Keďže záznamy pred importom validujem a teda pri importe ich považujem za spŕavne a platné, samotný čas trvania importu som skrátil vypnutím triggrov na tabuľkách, teda aj kontrolovania primary key a foreign key. Tieto opäť po naplnení všetkých tabuliek zapnem (vypnutie aj zapnutie je odoslané ako raw SQL).
 
