@@ -1,0 +1,16 @@
+block;current_time;total_duration;block_duration
+authors.jsonl conversion;2022-10-05T08:32Z;01:42;01:42
+conversations.jsonl conversion;2022-10-05T10:03Z;92:13;91:30
+database initialization;2022-10-05T10:03Z;92:09;0:56
+disabling triggers;2022-10-05T10:03Z;92:09;0:59
+table: hashtags;2022-10-05T10:04Z;93:59;0:50
+table: context_domains;2022-10-05T10:04Z;93:59;0:59
+table: context_entities;2022-10-05T10:04Z;93:59;0:59
+table: authors;2022-10-05T10:04Z;93:06;0:06
+table: conversations;2022-10-05T10:12Z;101:58;07:52
+table: context_annotations;2022-10-05T10:22Z;111:32;10:34
+table: annotations;2022-10-05T10:23Z;112:02;01:30
+table: links;2022-10-05T10:25Z;114:56;01:53
+table: conversation_hashtags;2022-10-05T10:28Z;117:29;03:32
+table: conversation_references;2022-10-05T10:35Z;124:48;06:19
+enabling triggers;2022-10-05T10:35Z;124:43;0:54
