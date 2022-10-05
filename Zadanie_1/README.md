@@ -27,7 +27,7 @@ Súbor authors.csv (cca 6 000 000 záznamov) bolo možné naraz importovať do d
 ### 1.2. Import do databázy
 Všetky SQL dopyty sú vykonávané **python** scriptom, ktorý pomocou **sqlalchemy** posiela raw SQL do lokálne bežiacej databázy. 
 
-Najprv do databázy pošlem SQL script na vytvorenie všetých tabuliek dátového modelu v takej podobe aká je požadovaná. Všetky id stĺpce, v tabuľkách okrem *authors*, *conversations*, *context_domains* a *context_entities*, sú definované ako autoincrement a identity, takže tie sa plnia automaticky pri napĺňaní týchto tabuliek.
+Najprv do databázy pošlem SQL script na vytvorenie všetých tabuliek dátového modelu v takej podobe aká je požadovaná. Všetky id stĺpce, v tabuľkách okrem tabuliek *authors*, *conversations*, *hashtags*, *context_domains* a *context_entities*, sú definované ako autoincrement a identity, takže tie sa plnia automaticky pri napĺňaní týchto tabuliek.
 
 Následne sa pomocou COPY (osodlaného ako raw SQL) do databázy importujú všetky čiastkové súbory všetkých tabuliek okrem *conversation_references*. Väzby vo forme foreign key v tabuľke *conversation_references* nie je možné validovať pri predspracovaní, takže tú nie je možné priamo importovať do cieľovej tabuľky. Na riešenie tohto problému je pri importovaní referencii vytvorená pomocná tabuľka *_conversation_references*, do ktorej sú nakopírované všetky záznamy. Z tejto pomocnej tabuľky sú následne za pomoci už naplnenej tabuľky *conversations* do cieľovej tabuľky *conversation_references* insertnuté len záznamy s platnými väzbami cez cudzie kľúče.
 
@@ -35,7 +35,7 @@ Keďže záznamy pred importom validujem a teda pri importe ich považujem za sp
 
 
 ## 2. Použité SQL
-Uvedené SQL je v tejto podobe posúvané sqlalc*hemy, ktoré každé jednotlivé volanie obalí do transakcie.
+Uvedené SQL je v tejto podobe posúvané sqlalchemy, ktoré každé jednotlivé volanie obalí do transakcie.
 
 ### 2.1. Inicializácia databázy
 Vytvorenie všetkých finálnych tabuliek aj so všetkými constraints.
